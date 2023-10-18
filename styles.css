@@ -1,0 +1,33 @@
+
+
+.btn-div{
+    
+}
+
+.btn-div button{
+    background-color: teal;
+    border-radius: 10px;
+}
+
+.btn-div button:hover{
+    cursor: pointer;
+    background-color: rgb(73, 230, 230);
+    transition: ease .2s;
+}
+
+.main-btn{
+    
+              height: 40px;
+              margin-top: 10px;
+              border: none;
+              color: white;
+              background-color: teal;
+              border-radius: 20px;
+           
+}
+
+.main-btn:hover{
+    cursor: pointer;
+    background-color: rgb(73, 230, 230);
+    transition: ease .2s;
+}

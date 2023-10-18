@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <center>
+      <div
+        style="
+          margin-top: 150px;
+          /* border: 3px solid teal; */
+          box-shadow: 0px 0px 2500px rgb(149, 232, 232);
+          width: 600px;
+          padding-bottom: 50px;
+        "
+      >
+        <div id="error"></div>
+        <div style="display: flex; flex-direction: column; width: 400px">
+          <h1 align="center" style="color: teal">Honourable Tazer</h1>
+          <input
+            style="
+              height: 40px;
+              border: none;
+              box-shadow: 1px 1px 2px gray;
+              border-radius: 10px;
+            "
+            type="text"
+            id="input"
+            placeholder="Enter your item
+            "
+          />
+
+          <button class="main-btn" onclick="addCart()">Add to cart</button>
+
+          <!-- display -->
+
+          <div id="display"></div>
+        </div>
+
+        <div
+          class="btn-div"
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            column-gap: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+          "
+        >
+          <!-- Add to start -->
+          <button
+            style="height: 40px; margin-top: 10px; border: none; color: white"
+            onclick="addtostart()"
+          >
+            Add to start
+          </button>
+
+          <!-- delete first -->
+          <button
+            style="height: 40px; margin-top: 10px; border: none; color: white"
+            onclick="deleteFirst()"
+          >
+            Delete First
+          </button>
+
+          <!-- Delete last -->
+          <button
+            style="height: 40px; margin-top: 10px; border: none; color: white"
+            onclick="deleteLast()"
+          >
+            Delete last
+          </button>
+
+          <!-- edit any -->
+          <button
+            style="height: 40px; margin-top: 10px; border: none; color: white"
+            onclick="editAny()"
+          >
+            Edit Any
+          </button>
+
+          <button
+            style="height: 40px; margin-top: 10px; border: none; color: white"
+            onclick="deleteAny()"
+          >
+            Delete Any
+          </button>
+
+          <button
+            style="height: 40px; margin-top: 10px; border: none; color: white"
+            onclick="deleteAll()"
+          >
+            Delete All
+          </button>
+        </div>
+      </div>
+    </center>
+
+    <script>
+      // var studentArrays = [65, 98, 96, 43.5, "Joshua", "Ayomide", true]
+      // console.log(studentArrays.length);
+      var inputEl = document.getElementById("input");
+
+      var allItems = [];
+      function addCart() {
+        var displayEl = document.getElementById("display");
+        var item = document.getElementById("input").value;
+
+        if (item == "") {
+          error.innerHTML = `<div style="
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-top: 10px;
+          width: 400px;
+          text-align: center;
+          border: none;
+          color: white;
+          background-color: red;
+        ">Space must be filled</div>`;
+        } else {
+          error.innerHTML = "";
+          allItems.push(item);
+          input.value = "";
+          displayTodos();
+        }
+      }
+
+      function addtostart() {
+        var item = document.getElementById("input").value;
+        if (item == "") {
+          error.innerHTML = `<div style="
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-top: 10px;
+          width: 400px;
+          text-align: center;
+          border: none;
+          color: white;
+          background-color: red;
+        ">Space must be filled</div>`;
+        } else {
+          allItems.unshift(input.value);
+
+          input.value = "";
+          displayTodos();
+        }
+      }
+
+      function deleteFirst() {
+        var item = document.getElementById("input").value;
+        if (allItems == "") {
+          error.innerHTML = `<div style="
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-top: 10px;
+          width: 400px;
+          text-align: center;
+          border: none;
+          color: white;
+          background-color: red;
+        ">Nothing to delete</div>`;
+        } else {
+          allItems.shift();
+          displayTodos();
+        }
+      }
+
+      function deleteLast() {
+        if (allItems == "") {
+          error.innerHTML = `<div style="
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-top: 10px;
+          width: 400px;
+          text-align: center;
+          border: none;
+          color: white;
+          background-color: red;
+        ">Nothing to delete</div>`;
+        } else {
+          allItems.pop();
+          displayTodos();
+        }
+      }
+
+      function displayTodos() {
+        display.innerHTML = "";
+        for (i = 0; i < allItems.length; i++) {
+          var element = allItems[i];
+          display.innerHTML += `<div  style="
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 10px;
+            width: 400px;
+            text-align: center;
+            border: none;
+            color: white;
+            background-color: rgb(7, 229, 229);
+          ">${i + 1}.&nbsp;${element}</div>`;
+        }
+      }
+
+      function editAny() {
+        if (allItems == "") {
+          error.innerHTML = `<div style="
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-top: 10px;
+          width: 400px;
+          text-align: center;
+          border: none;
+          color: white;
+          background-color: red;
+        ">Nothing to edit</div>`;
+        } else {
+          var userInput = prompt("what number do you want to edit");
+          var newValue = prompt("what is your new value");
+          allItems[userInput - 1] = newValue;
+          displayTodos();
+        }
+      }
+
+      function deleteAny() {
+        if (allItems == "") {
+          error.innerHTML = `<div style="
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-top: 10px;
+          width: 400px;
+          text-align: center;
+          border: none;
+          color: white;
+          background-color: red;
+        ">Nothing to delete</div>`;
+        } else {
+          var userInput = prompt("what number do you want to delete");
+          allItems.splice(userInput - 1, 1);
+
+          displayTodos();
+        }
+      }
+
+      function deleteAll() {
+        allItems = "";
+        displayTodos();
+      }
+
+      inputEl.addEventListener("keydown", function (key) {
+        if (key.code == "Enter") {
+          addCart();
+        }
+      });
+    </script>
+  </body>
+</html>
